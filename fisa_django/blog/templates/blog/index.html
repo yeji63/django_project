@@ -30,22 +30,21 @@
     </ul>
 
 
-    {% for p in post_list %}
+    {% for p in posts %}
         # 날짜 포맷 지정
-        {{ p.created_at | date:"Y-m-d" }}
+        {{ p.created_at | date:"Y/m/d" }}
         <p>
         # 소문자로 변경
-        {{ p.title | lower }}
+        {{ p.title | upper }}
         <p>
         # 특정 글자수만큼만 출력 
-        {{ p.content | truncatechars:50 }}
+        {{ p.content | truncatechars:6 }}
         <p>
         # 특정 단어수만큼만 출력
-        {{ p.content | truncatewords:50 }}
+        {{ p.content | truncatewords:1 }}
         <p>
-    {% endfor  %}
-
-
+    {% endfor %} 
+    
 {# 1 라인짜리 템플릿 주석입니다 #}
  
 {% comment %}  
@@ -58,6 +57,8 @@
 {% endautoescape %}
  
 {{ content|escape }}    # escape 필터
+
+{{ content }} 
 
 # 리스트 길이 반환: 
 {{ my_list|length }}
@@ -92,11 +93,12 @@
 <br>
 # safe - 문자열 `my_html`을 안전하다고 표시하여 자동 이스케이프를 방지:
 {% with my_html="<strong>Bold Text</strong>" %}
-{{ my_html|safe }}  
+{{ my_html|safe }} 
+<br>
 {% endwith %}
 <br>
 # yesno - boolean 값을 특정 문자열로 매핑 True,False,None:
-{% with my_boolean=1 %}
+{% with my_boolean=None %}
 {{ my_boolean|yesno:"예,아니오,글쎄요" }}  
 {% endwith %}
 <br>
@@ -123,8 +125,10 @@ def reverse_string(value):
 {% load custom_filters %}
 
 {% with my_string="Django" %}
-{{ my_string|reverse_string }}  # `my_string`이 'Django'일 경우 'ognajD'로 출력됩니다.
+{{ my_string|reverse_string }} 
+{{ my_string|reverse_string2 }} 
 {% endwith %} 
 {% endcomment %}
-</body>	
+
+</body>
 </html>
